@@ -1,0 +1,143 @@
+Series-01
+=========
+
+Rathesan Iyadurai (10-107-688)
+
+Exercise 1
+----------
+
+1. Do recent central processing units (CPUs) of desktop PCs support
+   concurrency? Why became concurrency for many software applications very
+   important these days?
+
+   Yes. The rate at which clock speed used to increase is stalling, but almost
+   every machine nowadays has multiple cores for concurrent processing. So
+   exploiting concurrency is the way to go.
+
+
+2. What is safety? Give one concrete example of a safety violation.
+
+   Safety is guaranteed when concurrent processes interact in a way so that
+   shared data is not corrupted ("nothing bad ever happens").
+
+   Example: Two threads (T1 and T2) increment a shared counter x once, but the
+   result is 1 (and not 2):
+
+       x := 0
+       T1 reads value 0
+       T2 also reads value 0
+       T2 adds 1 to 0
+       T1 adds 1 to 0
+       T2 writes 1 to x
+       T1 writes 1 to x
+       x is now 1
+
+
+3. What is liveness? Give a concrete example of a liveness violation.
+
+   Liveness ensures progress ("something good eventually happens"), so no
+   deadlocks (at least one process can always access a shared resource) and no
+   starvation (all processes can eventually access shared resources)
+
+   Example: Two threads (T1 and T2) want to acquire a lock on a resource the
+   other one holds:
+
+       T1 acquires lock on resource A
+       T2 acquires lock on resource B
+       T2 wants to acquire lock on resource A
+       T1 wants to acquire lock on resource B
+
+       Deadlock.
+
+
+4. Using the implementation in the slides, can a binary semaphore lead to a
+   deadlock? Can it lead to starvation? Explain with the aid of an example.
+
+   Yes and yes.
+
+   Deadlock example:
+
+       mutex1 := Semaphore(1)
+       mutex2 := Semaphore(1)
+
+       process P1
+           loop
+               P (mutex1)
+
+               // Assume P2 (see below) has decreased the value of
+               // mutex2 to 0, so P1 waits here.
+               P (mutex2)
+
+               // Critical section
+
+               V (mutex1)
+               V (mutex2)
+           end
+       end
+
+       process P2
+           loop
+               P (mutex2)
+
+               // Assume P1 has already decreased the value of
+               // mutex1 to 0, so P2 waits as well -> Deadlock
+               P (mutex1)
+
+               // Critical section
+
+               V (mutex2)
+               V (mutex1)
+           end
+       end
+
+   Starvation example (maybe a little far fetched):
+
+       mutex := Semaphore(1)
+
+       process P1
+           loop
+               P (mutex)
+               // do something
+               V (mutex)
+           end
+       end
+
+       process P2
+           loop
+               // Assume P1 has decreased the semaphore and P2 has to wait. Now
+               // for if P1 dies for whatever reason, P2 starves.
+               P (mutex)
+               V (mutex)
+           end
+       end
+
+
+
+
+5. Why do we need synchronization mechanisms in concurrent programs?
+
+   To ensure consistent operation on shared data. Without synchronization an
+   operation on one thread might collide with another operation in another
+   thread on the same shared data which might result in corrupt data and
+   unexpected behaviour (see example above).
+
+
+6. How do monitors differ from semaphores? Please provide a precise answer.
+
+
+7. How are monitors and message passing similar? And how are they different?
+
+Exercise 2
+----------
+
+    x := 1
+    Thread 1 -> x := x + 7.
+    Thread 2 -> x := x * 5.
+
+  1. x = 8
+  2. x = 5
+  3. x = 40
+  4. x = 12
+
+Exercise 3
+----------
