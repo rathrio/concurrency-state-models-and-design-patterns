@@ -90,7 +90,7 @@ Exercise 1
            end
        end
 
-   Starvation example (maybe a little far fetched):
+   Starvation example (maybe somewhat contrived):
 
        mutex := Semaphore(1)
 
@@ -104,14 +104,13 @@ Exercise 1
 
        process P2
            loop
-               // Assume P1 has decreased the semaphore and P2 has to wait. Now
-               // for if P1 dies for whatever reason, P2 starves.
+               // Assume P1 has decreased the semaphore and P2 has to wait
+               // here. If P1 now dies for whatever reason, P2 starves.
                P (mutex)
+               // do something
                V (mutex)
            end
        end
-
-
 
 
 5. Why do we need synchronization mechanisms in concurrent programs?
@@ -141,3 +140,58 @@ Exercise 2
 
 Exercise 3
 ----------
+
+
+class Monitor
+
+    mutex := Semaphore(1)
+
+    def wait
+        P (mutex)
+
+
+    def signal
+        V (mutex)
+
+
+
+
+notFull := Monitor.new
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
