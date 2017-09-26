@@ -115,7 +115,7 @@ Exercise 1
 
 5. Why do we need synchronization mechanisms in concurrent programs?
 
-   To ensure consistent operation on shared data. Without synchronization an
+   To ensure consistent operation on shared data. Without synchronization, an
    operation on one thread might collide with another operation in another
    thread on the same shared data which might result in corrupt data and
    unexpected behaviour (see example above).
@@ -123,8 +123,25 @@ Exercise 1
 
 6. How do monitors differ from semaphores? Please provide a precise answer.
 
+   A semaphore is basically a just a counter that is atomically
+   incremented/decremented with P and V (see examples above for behaviour)
+   whereas a monitor can be any thread-safe object that synchronizes access to
+   a shared method/variable via mutual exclusion.
+
+   Monitors also allow threads to give up a resource and wait on a condition.
+   Complementary, threads can signal potentially waiting threads via monitors
+   in order to wake them up (example: slide 34).
+
 
 7. How are monitors and message passing similar? And how are they different?
+
+   Both provide mechanics for threads to communicate (signal/wait on condition
+   with monitors, send/receive with message passing).
+
+   In the message passing model, we don't have to worry about shared state
+   though, since each thread has its own state and communicates only via
+   messages with other threads, whereas the whole point of monitors is to
+   protect state/procedures that can be accessed by multiple threads.
 
 Exercise 2
 ----------
