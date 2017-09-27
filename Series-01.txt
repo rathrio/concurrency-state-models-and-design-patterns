@@ -143,18 +143,64 @@ Exercise 1
    messages with other threads, whereas the point of monitors is to protect
    state/procedures that can be accessed by multiple threads.
 
+
 Exercise 2
 ----------
 
     x := 1
-    Thread 1 -> x := x + 7.
-    Thread 2 -> x := x * 5.
+    Thread 1 (T1) -> x := x + 7.
+    Thread 2 (T2) -> x := x * 5.
 
-  1. x = 8
-  2. x = 5
-  3. x = 40
-  4. x = 12
+  Possible values for x are 5, 8, 12 and 40.
 
+  Trace 1:
+    T1 reads x = 1
+    T1 adds 7 to 1
+    T1 writes 8 to x
+    T2 reads x = 8
+    T2 multiplies 5 to 8
+    T2 writes 40 to x
+    x is 40
+
+  Trace 2:
+    T2 reads x = 1
+    T2 multiplies 5 to 1
+    T2 writes 5 to x
+    T1 reads x = 5
+    T1 adds 7 to 5
+    T1 writes 12 to x
+    x is 12
+
+  Trace 3:
+    T1 reads x = 1
+    T2 reads x = 1
+    T1 adds 7 to 1
+    T1 writes 8 to x
+    T2 multiplies 5 to 1
+    T2 writes 5 to x
+    x is 5
+
+  Trace 4:
+    T1 reads x = 1
+    T2 reads x = 1
+    T2 multiplies 5 to 1
+    T2 writes 5 to x
+    T1 adds 7 to 1
+    T1 writes 8 to x
+    x is 8
+
+  You could now rearrange some lines to have slightly different traces, e.g.,
+  change Trace 4:
+
+    ...
+    T2 multiplies 5 to 1
+    T1 adds 7 to 1
+    T2 writes 5 to x
+    T1 writes 8 to x
+
+  But in the end, we should always get a value in {5, 8, 12, 40} for x.
+
+    
 Exercise 3
 ----------
 
@@ -182,3 +228,4 @@ Inside of a synchronized procedure:
         V (next)       // Let waiting threads know we're done
     else
         V (mutex)      // Otherwise just release the mutex semaphore
+
