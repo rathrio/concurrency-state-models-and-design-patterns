@@ -55,6 +55,8 @@ Exercise 1
 
    Yes and yes.
 
+   **Update**: Not possible with **one** binary semaphore.
+
    Deadlock example:
 
        mutex1 := Semaphore(1)
@@ -122,6 +124,10 @@ Exercise 1
 
 
 6. How do monitors differ from semaphores? Please provide a precise answer.
+
+   **Update**: Monitors allow only one thread into the monitored room,
+   Semaphores can allow multiple threads. Monitors and Semaphores can each be
+   implemented with the other.
 
    A semaphore is basically a just a counter that is atomically
    incremented/decremented with P and V (see examples above for behaviour)
@@ -229,3 +235,31 @@ Inside of a synchronized procedure:
     else
         V (mutex)      // Otherwise just release the mutex semaphore
 
+**Update**:
+
+    type Monitor {
+        mutex := Semaphore(0)
+        lock := Lock()
+
+        wait() {
+            lock.release()
+            P (mutex)
+            lock.acquire()
+        }
+
+        signal() {
+            V (mutex)
+        }
+    }
+
+    type Lock {
+        mutex := Semaphore(1)
+
+        acquire() {
+            P (mutex)
+        }
+
+        release() {
+            V (mutex)
+        }
+    }
