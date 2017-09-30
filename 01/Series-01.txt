@@ -55,6 +55,8 @@ Exercise 1
 
    Yes and yes.
 
+   **Update**: Not possible with **one** binary semaphore.
+
    Deadlock example:
 
        mutex1 := Semaphore(1)
@@ -123,92 +125,141 @@ Exercise 1
 
 6. How do monitors differ from semaphores? Please provide a precise answer.
 
+   **Update**: Monitors allow only one thread into the monitored room,
+   Semaphores can allow multiple threads. Monitors and Semaphores can each be
+   implemented with the other.
+
    A semaphore is basically a just a counter that is atomically
    incremented/decremented with P and V (see examples above for behaviour)
    whereas a monitor can be any thread-safe object that synchronizes access to
    a shared method/variable via mutual exclusion.
 
    Monitors also allow threads to give up a resource and wait on a condition.
-   Complementary, threads can signal potentially waiting threads via monitors
-   in order to wake them up (example: slide 34).
+   Complementary, threads can signal potentially waiting threads in order to
+   wake them up (example: slide 34).
 
 
 7. How are monitors and message passing similar? And how are they different?
 
-   Both provide mechanics for threads to communicate (signal/wait on condition
+   Both provide mechanisms for threads to communicate (signal/wait on condition
    with monitors, send/receive with message passing).
 
    In the message passing model, we don't have to worry about shared state
    though, since each thread has its own state and communicates only via
-   messages with other threads, whereas the whole point of monitors is to
-   protect state/procedures that can be accessed by multiple threads.
+   messages with other threads, whereas the point of monitors is to protect
+   state/procedures that can be accessed by multiple threads.
+
 
 Exercise 2
 ----------
 
     x := 1
-    Thread 1 -> x := x + 7.
-    Thread 2 -> x := x * 5.
+    Thread 1 (T1) -> x := x + 7.
+    Thread 2 (T2) -> x := x * 5.
 
-  1. x = 8
-  2. x = 5
-  3. x = 40
-  4. x = 12
+  Possible values for x are 5, 8, 12 and 40.
 
+  Trace 1:
+    T1 reads x = 1
+    T1 adds 7 to 1
+    T1 writes 8 to x
+    T2 reads x = 8
+    T2 multiplies 5 to 8
+    T2 writes 40 to x
+    x is 40
+
+  Trace 2:
+    T2 reads x = 1
+    T2 multiplies 5 to 1
+    T2 writes 5 to x
+    T1 reads x = 5
+    T1 adds 7 to 5
+    T1 writes 12 to x
+    x is 12
+
+  Trace 3:
+    T1 reads x = 1
+    T2 reads x = 1
+    T1 adds 7 to 1
+    T1 writes 8 to x
+    T2 multiplies 5 to 1
+    T2 writes 5 to x
+    x is 5
+
+  Trace 4:
+    T1 reads x = 1
+    T2 reads x = 1
+    T2 multiplies 5 to 1
+    T2 writes 5 to x
+    T1 adds 7 to 1
+    T1 writes 8 to x
+    x is 8
+
+  You could now rearrange some lines to have slightly different traces, e.g.,
+  change Trace 4:
+
+    ...
+    T2 multiplies 5 to 1
+    T1 adds 7 to 1
+    T2 writes 5 to x
+    T1 writes 8 to x
+
+  But in the end, we should always get a value in {5, 8, 12, 40} for x.
+
+    
 Exercise 3
 ----------
 
+Threads have access to the following variables:
 
-class Monitor
-
+    // Mutex for exclusive access (initialized to 1)
     mutex := Semaphore(1)
 
-    def wait
-        P (mutex)
+    // Counting semaphore that threads can use to suspend themselves when
+    // they're already in the monitor (initialized to 0)
+    next := Semaphore(0)
 
+    // How many threads are waiting in the next queue?
+    next_count := 0
 
-    def signal
-        V (mutex)
+Inside of a synchronized procedure:
 
+    // A thread must acquire exclusive access by decrementing the mutex
+    // semaphore.
+    P (mutex)
 
+    // Do critical stuff
 
+    if next_count > 0
+        V (next)       // Let waiting threads know we're done
+    else
+        V (mutex)      // Otherwise just release the mutex semaphore
 
-notFull := Monitor.new
+**Update**:
 
+    type Monitor {
+        mutex := Semaphore(0)
+        lock := Lock()
 
+        wait() {
+            lock.release()
+            P (mutex)
+            lock.acquire()
+        }
 
+        signal() {
+            V (mutex)
+        }
+    }
 
+    type Lock {
+        mutex := Semaphore(1)
 
+        acquire() {
+            P (mutex)
+        }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+        release() {
+            V (mutex)
+        }
+    }
