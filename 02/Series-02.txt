@@ -1,0 +1,52 @@
+Series-02
+=========
+
+Rathesan Iyadurai (10-107-688)
+
+Exercise 1
+----------
+
+a. What states can a Java thread be in?
+
+   - NEW: not yet started
+   - RUNNABLE: executing in the JVM
+   - BLOCKED: waiting for a monitor lock
+   - WAITING: waiting indefinitely for another thread to perform a particular
+              action
+   - TIMED_WAITING: waiting for another thread to perform an action for up to a
+                    specified waiting time
+   - TERMINATED: when exited
+
+   See https://docs.oracle.com/javase/8/docs/api/java/lang/Thread.State.html
+   for more details.
+
+b. How can you turn a Java class into a monitor?
+
+   By declaring all methods of that class as being synchronized (e.g. with the
+   synchronized method modifier), you turn instances of that class into a
+   monitor.
+
+c. What is the Runnable interface good for?
+
+   If you do not want your class to inherit from Thread (because it might
+   already inherit from some other class), you can have that class implement
+   the Runnable interface. An instance of that class can then be used to
+   initialize a thread.
+
+d. Specify an FSP that repeatedly performs hello, but may stop at any time.
+
+   PROCESS = (
+       (hello -> STOP)
+       |
+       (hello -> PROCESS)
+   ).
+
+
+Exercise 2
+----------
+
+Exercise 3
+----------
+
+Exercise 4
+----------
