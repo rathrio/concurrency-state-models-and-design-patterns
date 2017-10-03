@@ -45,8 +45,64 @@ d. Specify an FSP that repeatedly performs hello, but may stop at any time.
 Exercise 2
 ----------
 
+    public class Singleton {
+        private static Singleton instance = null;
+
+        private Singleton() {}
+
+        public static Singleton getInstance() {
+            if (instance == null) {
+                instance = new Singleton();
+            }
+            return instance;
+        }
+    }
+
+a. What happens if the application is multithreaded?
+
+   The "if (instance == null)" check could be performed by multiple threads at
+   the same time. As a consequence, multiple threads could evaluate
+   "instance == null" to true and thus overwrite already initialized singleton
+   instances. This implementation is therefore not thread-safe.
+
+b. How to implement a thread-safe singleton in Java?
+
+   Synchronize "getInstance()", e.g.,:
+
+       public synchronized static Singleton getInstance() {
+           ...
+
+c. Suppose there is 1000 requests/second from different threads to this
+   Singleton. Does your implementation introduce a bottleneck? If yes, how can you
+   improve it?
+
+   Only one thread can now call getInstance() at the time. This makes sense for
+   the lazy-initialization behaviour, but we now unnecessarily have threads
+   acquire a lock everytime they just want to read the reference to an existing
+   instance. This might decrease performance.
+
+   This can be solved by not synchronizing at all: Java internally synchronizes
+   the loading of classes. With this knowledge, we can remove the synchronized
+   modifier and simply move the initialization of the singleton to another
+   class, e.g.,:
+
+       private static class Helper {
+           static Singleton instance = new Singleton();
+       }
+
+       public class Singleton {
+           public static Singleton getInstance() {
+               // Only one thread may load the class Helper for the first time,
+               // hence guaranteeing that only one thread triggers the creation
+               // of a singleton. Subsequent reads require no locking!
+               return Helper.instance;
+           }
+       }
+
+
 Exercise 3
 ----------
+
 
 Exercise 4
 ----------
