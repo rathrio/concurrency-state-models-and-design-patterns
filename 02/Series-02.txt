@@ -152,3 +152,43 @@ PERSON
 
 Exercise 4
 ----------
+
+a. How many states and how many possible traces does it have if the number of
+   steps is 5 (as in the lecture)?
+
+   #states = (5 + 1)^2
+           = 36
+
+   #traces = 10 choose 5
+           = 10! / (5! * (10 - 5)!)
+           = 252
+
+b. What is the number of states and traces in the general case (i.e. for n steps)?
+
+   The total possible number of states is simply the product of states, so in
+   our case, where both processes have n states:
+
+       #states = (n + 1)^2
+
+   To get the total number of traces you choose a possible trace "without
+   putting it back" from the (ordered) pool of steps. This can be computed with
+   the binomial coefficient, i.e. (p choose q). In our case, p is the number of
+   steps of the two processes added up and q is the number of steps for one
+   process.
+
+   p = n + n
+   q = n
+   #traces = (p choose q)
+           = p! / (q! * (p - q)!)
+
+c. Check your solution using the LTSA tool.
+
+   I played around with N in the following FSP from the slides:
+
+       const N = 1         // NOTE: meaning 2 states
+       Competitor = KM[0],
+       KM[n:0..N] = (when (n<N) [n+1] -> KM[n+1] | when(n == N) done -> STOP).
+
+       ||Race5K = (tortoise:Competitor || hare:Competitor).
+
+   The number of states, for instance, is displayed in the output tab.
