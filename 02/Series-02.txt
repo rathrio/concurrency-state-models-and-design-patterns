@@ -103,6 +103,52 @@ c. Suppose there is 1000 requests/second from different threads to this
 Exercise 3
 ----------
 
+APPOINTMENT
+
+    APPOINTMENT = (hello -> converse -> goodbye -> STOP).
+
+HOLIDAY
+
+    HOLIDAY = (arrive -> relax -> leave -> HOLIDAY).
+
+SPEED
+
+    SPEED = (on -> ON),
+    ON    = (speed -> ON | off -> SPEED).
+
+LEFTONCE
+
+    LEFTONCE = (ahead -> AHEAD),
+    AHEAD    = (left -> STOP | right -> LEFTONCE).
+
+TREBLE
+
+    TREBLE = (
+        in[1] -> out[3] -> TREBLE
+        |
+        in[2] -> out[6] -> TREBLE
+        |
+        in[3] -> out[9] -> TREBLE
+    ).
+
+FIVETICK
+
+    FIVETICK = (tick -> tick -> tick -> tick -> tick -> STOP).
+
+FIVETICK, more generically
+
+    const N = 5
+    FIVETICK     = TICK[0],
+    TICK[n:0..N] = (when (n < N) tick -> TICK[n + 1]).
+
+PERSON
+
+    PERSON = (
+        workday -> sleep -> work -> PERSON
+        |
+        holiday -> sleep -> {play,shop} -> PERSON
+    ).
+
 
 Exercise 4
 ----------
