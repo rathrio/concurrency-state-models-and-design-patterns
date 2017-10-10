@@ -92,5 +92,18 @@ BOTTOM = (
 ).
 
 
+You could get rid of the TUNED state by allowing the following actions in
+SCANNING:
+
+    SCANNING = (
+      off -> RADIO
+      |
+      {lock, reset} -> ON
+      |
+      end -> BOTTOM
+    )
+
+
+
 Exercise 4
 ----------
