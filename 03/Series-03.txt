@@ -135,3 +135,21 @@ compile.
 
 Exercise 4
 ----------
+
+LOCK = (acquire -> release -> LOCK).
+
+STACK = (
+    push -> FULL
+    |
+    pop -> ERROR
+),
+FULL = (
+    push -> ERROR
+    |
+    pop -> STACK
+).
+
+PRODUCER = (acquire -> push -> release -> PRODUCER).
+CONSUMER = (acquire -> pop -> release -> CONSUMER).
+
+||PRODUCER_CONSUMER = ({p,c}::STACK || {p,c}::LOCK || p:PRODUCER || c:CONSUMER).
