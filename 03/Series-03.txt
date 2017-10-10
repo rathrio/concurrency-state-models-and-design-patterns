@@ -11,8 +11,8 @@ a. What are safety properties? How are they modeled in FSP?
    Safety properties assert that nothing bad happens, e.g., shared data is not
    corrupted when concurrent processes interact with it.
 
-   You can express safety conditions in FSP as a "property" expression. In such
-   an expression, all state transitions that are not explicitly declared
+   You can express safety conditions in FSPs as a "property" expression. In
+   such an expression, all state transitions that are not explicitly declared
    automatically lead to an ERROR state. See slide 27 of lecture 3 for an
    example.
 
@@ -61,49 +61,95 @@ only happen from one state. This is not the case for T2.
 Exercise 3
 ----------
 
-RADIO = (on -> ON),
-ON = (
-    off -> RADIO
-    |
-    reset -> ON
-    |
-    scan -> SCANNING
-),
-SCANNING = (
-    off -> RADIO
-    |
-    reset -> ON
-    |
-    lock -> TUNED
-    |
-    end -> BOTTOM
-),
-TUNED = (
-    off -> RADIO
-    |
-    reset -> ON
-    |
-    scan -> SCANNING
-),
-BOTTOM = (
-    off -> RADIO
-    |
-    reset -> ON
-).
-
-
-You could get rid of the TUNED state by allowing the following actions in
-SCANNING:
-
+    RADIO = (on -> TUNED_TOP),
+    TUNED_TOP = (
+        off -> RADIO
+        |
+        reset -> TUNED_TOP
+        |
+        scan -> SCANNING
+    ),
     SCANNING = (
         off -> RADIO
         |
-        {lock, reset} -> ON
+        reset -> TUNED_TOP
+        |
+        scan -> SCANNING
+        |
+        lock -> TUNED
         |
         end -> BOTTOM
-    )
+    ),
+    TUNED = (
+        off -> RADIO
+        |
+        reset -> TUNED_TOP
+        |
+        scan -> SCANNING
+    ),
+    BOTTOM = (
+        off -> RADIO
+        |
+        reset -> TUNED_TOP
+        |
+        scan -> BOTTOM
+    ).
 
+Note that this FSP doesn't model a "countable" FM band, since the number of
+stations is not defined. This radio could tune into an infinite amount of
+stations until we reach the BOTTOM state. As a consequence, it doesn't matter
+whether the radio is tuned in at the top of the band or somewhere in the
+middle.
+
+Given that uncountable nature, we could merge TUNED_TOP with TUNED and get a
+smaller FSP that models the same radio:
+
+    RADIO = (on -> TUNED),
+    TUNED = (
+        off -> RADIO
+        |
+        reset -> TUNED
+        |
+        scan -> SCANNING
+    ),
+    SCANNING = (
+        off -> RADIO
+        |
+        {lock, reset} -> TUNED
+        |
+        scan -> SCANNING
+        |
+        end -> BOTTOM
+    ),
+    BOTTOM = (
+        off -> RADIO
+        |
+        reset -> TUNED
+        |
+        scan -> BOTTOM
+    ).
+
+You can generate the LTS by pasting the FSP in the LTSA tool and clicking on
+compile.
 
 
 Exercise 4
 ----------
+
+LOCK = (acquire -> release -> LOCK).
+
+STACK = (
+    push -> FULL
+    |
+    pop -> ERROR
+),
+FULL = (
+    push -> ERROR
+    |
+    pop -> STACK
+).
+
+PRODUCER = (acquire -> push -> release -> PRODUCER).
+CONSUMER = (acquire -> pop -> release -> CONSUMER).
+
+||PRODUCER_CONSUMER = ({p,c}::STACK || {p,c}::LOCK || p:PRODUCER || c:CONSUMER).
