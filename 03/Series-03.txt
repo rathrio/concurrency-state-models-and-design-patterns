@@ -8,17 +8,54 @@ Exercise 1
 
 a. What are safety properties? How are they modeled in FSP?
 
+   Safety properties assert that nothing bad happens, e.g., shared data is not
+   corrupted when concurrent processes interact with it.
+
+   You can express safety conditions in FSP as a "property" expression. In such
+   an expression, all state transitions that are not explicitly declared
+   automatically lead to an ERROR state. See slide 27 of lecture 3 for an
+   example.
+
 b. Is the busy-wait mutex protocol fair? Deadlock-free? Justify your answer.
 
+   Yes, it fair and deadlock-free.
+
+   TODO: Justify
+
 c. Can you ensure safety in concurrent programs without using locks?
+
+   Yes, see actor model description in d.
 
 d. The Java language designers decided to implement concurrency based on
    monitors. What is the main reason behind this decision? What other options
    except monitors could have been chosen? (Hint: Consider slide 28 of lecture 1)
 
+   A monitor is an entity that encapsulates resources and operations that
+   manipulate them (def on slide 33, lecture 1). This description pretty much
+   applies to a Java object as well. Thus it's not that far-fetched to use a
+   monitor based concurrency model, whereas the Java objects themselves may act
+   as monitors.
+
+   They could have also went with an Actor model, where processes only modify
+   local state and communicate with others via message passing only,
+   eliminating the need for locking shared data access.
+
+   See https://en.wikipedia.org/wiki/Actor_model for more details.
+
 
 Exercise 2
 ----------
+
+Are T1 and T2 equivalent? Why?
+
+    R = (a->c->R).
+    S = (b->c->S).
+    ||T1 = (R || S).
+    T2 = (a->b->c->T2|b->a->c->T2).
+
+Not quite: Unlike in T2, the c in T1 represents an action that has to occur
+simultaneously for all traces. This can be verified in the LTS. c in T1 can
+only happen from one state. This is not the case for T2.
 
 Exercise 3
 ----------
