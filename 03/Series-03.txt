@@ -63,32 +63,32 @@ Exercise 3
 
 RADIO = (on -> ON),
 ON = (
-	off -> RADIO
-	|
-	reset -> ON
-	|
-	scan -> SCANNING
+    off -> RADIO
+    |
+    reset -> ON
+    |
+    scan -> SCANNING
 ),
 SCANNING = (
-	off -> RADIO
-	|
-	reset -> ON
-	|
-	lock -> TUNED
-	|
-	end -> BOTTOM
+    off -> RADIO
+    |
+    reset -> ON
+    |
+    lock -> TUNED
+    |
+    end -> BOTTOM
 ),
 TUNED = (
-	off -> RADIO
-	|
-	reset -> ON
-	|
-	scan -> SCANNING
+    off -> RADIO
+    |
+    reset -> ON
+    |
+    scan -> SCANNING
 ),
 BOTTOM = (
-	off -> RADIO
-	|
-	reset -> ON
+    off -> RADIO
+    |
+    reset -> ON
 ).
 
 
@@ -96,11 +96,11 @@ You could get rid of the TUNED state by allowing the following actions in
 SCANNING:
 
     SCANNING = (
-      off -> RADIO
-      |
-      {lock, reset} -> ON
-      |
-      end -> BOTTOM
+        off -> RADIO
+        |
+        {lock, reset} -> ON
+        |
+        end -> BOTTOM
     )
 
 
