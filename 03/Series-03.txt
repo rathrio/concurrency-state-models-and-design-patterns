@@ -143,3 +143,8 @@ STACK = (
 ).
 
 LOCK = (acquire -> release -> LOCK).
+
+PRODUCER = (acquire -> push[0..1] -> release -> PRODUCER).
+CONSUMER = (acquire -> pop[0..1] -> release -> CONSUMER).
+
+||PC = (LOCK || STACK || PRODUCER || CONSUMER).
