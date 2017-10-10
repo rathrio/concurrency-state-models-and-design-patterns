@@ -1,0 +1,27 @@
+Series-03
+=========
+
+Rathesan Iyadurai (10-107-688)
+
+Exercise 1
+----------
+
+a. What are safety properties? How are they modeled in FSP?
+
+b. Is the busy-wait mutex protocol fair? Deadlock-free? Justify your answer.
+
+c. Can you ensure safety in concurrent programs without using locks?
+
+d. The Java language designers decided to implement concurrency based on
+   monitors. What is the main reason behind this decision? What other options
+   except monitors could have been chosen? (Hint: Consider slide 28 of lecture 1)
+
+
+Exercise 2
+----------
+
+Exercise 3
+----------
+
+Exercise 4
+----------
