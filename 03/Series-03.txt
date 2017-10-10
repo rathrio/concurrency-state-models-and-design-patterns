@@ -36,9 +36,10 @@ d. The Java language designers decided to implement concurrency based on
    monitor based concurrency model, whereas the Java objects themselves may act
    as monitors.
 
-   They could have also went with an Actor model, where processes only modify
+   They could have also went with an actor model, where processes only modify
    local state and communicate with others via message passing only,
-   eliminating the need for locking shared data access.
+   eliminating the need for locking shared data access. This is also not that
+   far away from the concept of objects sending messages to collaborate.
 
    See https://en.wikipedia.org/wiki/Actor_model for more details.
 
@@ -59,6 +60,37 @@ only happen from one state. This is not the case for T2.
 
 Exercise 3
 ----------
+
+RADIO = (on -> ON),
+ON = (
+	off -> RADIO
+	|
+	reset -> ON
+	|
+	scan -> SCANNING
+),
+SCANNING = (
+	off -> RADIO
+	|
+	reset -> ON
+	|
+	lock -> TUNED
+	|
+	end -> BOTTOM
+),
+TUNED = (
+	off -> RADIO
+	|
+	reset -> ON
+	|
+	scan -> SCANNING
+),
+BOTTOM = (
+	off -> RADIO
+	|
+	reset -> ON
+).
+
 
 Exercise 4
 ----------
