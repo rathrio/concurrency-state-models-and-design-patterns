@@ -54,9 +54,12 @@ Are T1 and T2 equivalent? Why?
     ||T1 = (R || S).
     T2 = (a->b->c->T2|b->a->c->T2).
 
-Not quite: Unlike in T2, the c in T1 represents an action that has to occur
-simultaneously for all traces. This can be verified in the LTS. c in T1 can
-only happen from one state. This is not the case for T2.
+Yes they behave the same. This can be verified by inspecting the possible
+traces in the LTS of T1 and T2 which are for both consist of the following
+loops:
+
+1. a -> b -> c -> start
+2. b -> a -> c -> start
 
 Exercise 3
 ----------
@@ -136,15 +139,73 @@ compile.
 Exercise 4
 ----------
 
-STACK = (
-    push[v:0..1] -> pop[v] -> push[w:0..1] -> pop[w] -> STACK
-    |
-    push[v:0..1] -> push[w:0..1] -> pop[w] -> pop[v] -> STACK
-).
+    range T = 0..1
 
-LOCK = (acquire -> release -> LOCK).
+    // Stack alphabet
+    set StackAlpha = {stack.{push[T], pop[T], acquire, release}}
 
-PRODUCER = (acquire -> push[0..1] -> release -> PRODUCER).
-CONSUMER = (acquire -> pop[0..1] -> release -> CONSUMER).
+    // Stack that validates push and pops in each state, e.g. one cannot pop a
+    // 0 when a 1 was pushed before. There's probably a more consise way to
+    // write this down...
+    STACK = (
+        push[1] -> STACK1
+        |
+        push[0] -> STACK0
+        |
+        pop[T] -> ERROR
+    ),
+    STACK1 = (
+        push[1] -> STACK11
+        |
+        push[0] -> STACK10
+        |
+        pop[0] -> ERROR
+        |
+        pop[1] -> STACK
+    ),
+    STACK0 = (
+        push[1] -> STACK01
+        |
+        push[0] -> STACK00
+        |
+        pop[0] -> STACK
+        |
+        pop[1] -> ERROR
+    ),
+    STACK11 = (
+        push[T] -> ERROR
+        |
+        pop[0] -> ERROR
+        |
+        pop[1] -> STACK1
+    ),
+    STACK10 = (
+        push[T] -> ERROR
+        |
+        pop[0] -> STACK1
+        |
+        pop[1] -> ERROR
+    ),
+    STACK01 = (
+        push[T] -> ERROR
+        |
+        pop[0] -> ERROR
+        |
+        pop[1] -> STACK0
+    ),
+    STACK00 = (
+        push[T] -> ERROR
+        |
+        pop[0] -> STACK0
+        |
+        pop[1] -> ERROR
+    ).
 
-||PC = (LOCK || STACK || PRODUCER || CONSUMER).
+    LOCK = (acquire -> release -> LOCK).
+
+    PRODUCER = (stack.acquire -> stack.push[T] -> stack.release -> PRODUCER)+StackAlpha.
+    CONSUMER = (stack.acquire -> stack.pop[T] -> stack.release -> CONSUMER)+StackAlpha.
+
+    ||PC =  (p:PRODUCER || c:CONSUMER || {p,c}::stack:(LOCK || STACK)).
+
+The traces in the LTSA are correct.
