@@ -1,0 +1,48 @@
+Series-04
+=========
+
+Rathesan Iyadurai (10-107-688)
+
+Exercise 1
+----------
+
+a. Why are immutable classes inherently safe?
+   
+   An immutable object cannot be changed and therefore cannot be corrupted,
+   just because multiple processes access it.
+
+b. What is "balking"?
+
+   Balking is throwing an exception if the precondition of a guarded,
+   state-dependent action fails.
+
+   Given that the precondition itself does not depend on shared state, one
+   could also check that precondition outside of the action.
+
+c. When is partial synchronization better than full synchronization?
+
+   When you have lots of sections that would be unnecessarily synchronized,
+   e.g., methods only working with immutable data.
+   
+   Given that scenario, you can have a higher proportion of your program run in
+   parallel (because you only synchronize parts that absolutely have to be)
+   which can result in a speedup. See Amdahl's Law.
+
+d. How does containment avoid the need for synchronization?
+
+   The contained objects are only being accessed by one thread at the time, so
+   there's no need to synchronize operations on the contained objects. This of
+   course requires that the "host" object is synchronized.
+
+e. What liveness problems can full synchronization introduce?
+
+   With full synchronization, especially with a balking design, clients have to
+   busy wait if requests fail, and there's no guarantee that they will
+   eventually continue, thereby starving to death.
+
+f. When is it legitimate to declare only some methods as synchronized?
+
+   When you have sections (or whole methods) in you object that are not
+   critical sections, i.e., do not deal with mutable state. Even methods that
+   have both critical and uncritical sections could be split up, so that only
+   the critical part needs synchronization.
