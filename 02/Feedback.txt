@@ -1,0 +1,27 @@
+HUGE CONGRATS! You achieved 10/10 pts!
+ 
+1a) 0.5pts Nice googling! ;)
+ 
+1b) 0.5pts YES!
+ 
+1c) 0.5pts You could have used the term "multiple inheritance", but your answer is still quite nice.
+ 
+1d) 0.5pts Perfect!
+ 
+ 
+2a) 0.5pts PERFECT!
+ 
+2b) 0.5pts Correct! Maybe it's just me, but I prefer the "synchronized" keyword after the "static" keyword during method specification and as you may noticed, I have really nothing to complain about your solution ;)
+ 
+2c) 1pts Nice solution, not the one we expected, but perfectly legit. Please still have a look at our solution to give another approach a try :)
+ 
+ 
+3) 3.5pts Nice work!
+ 
+ 
+4a) 1pts Straight to the point with the states and traces.
+ 
+4b) 1pts Same as before :)
+ 
+4c) 0.5pts I believe you on this one :D
+

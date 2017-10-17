@@ -1,0 +1,35 @@
+HUGE Congrats! You achieved 10/10 pts.
+
+1a) 1pt Correct, although you could have elaborated a bit more on the why part
+;)
+
+1b) 1pt Perfect!
+
+1c) 1pt Again, perfect!
+
+1d) 1pt When you look closely at the example you will see that there has been
+just one mutex mentioned, so your example is overly complicated. In your
+example your conclusion makes perfectly sense, but not so much for the provided
+code. However, you thought more about the concept than required, hence, I'll
+give you this one. BTW: Starvation can occur either way, just by letting always
+the wrong process progress.
+
+1e) 1pt Please also mention the liveness property a bit more explicit and not
+just the safety one.
+
+1f) 1pt You got multiple, but somewhat chaotic, valid statements. For your
+information: We emphasize the fact that semaphores can allow multiple processes
+at the same time to enter the critical section, whereas with monitors just one
+is allowed.
+
+1g) 1pt Again not very straight, but you got somehow the point. For example,
+protect state is the fundamental principle of synchronisation, so both
+approaches make use of it. Please consider our solution on this one.
+
+
+2) 2pt Nice!
+
+
+3) 1pt Some more operations may be needed to ensure correctness, but you got
+the point with the binary semaphore required for the monitor. Please still have
+a look at our proposal in the solution sheet.

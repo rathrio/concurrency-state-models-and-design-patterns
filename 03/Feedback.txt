@@ -1,0 +1,29 @@
+HUGE CONGRATS! You achieved 9.5/10 pts!
+ 
+1a) 0.5pts Nice!
+ 
+1b) 0.5pts Nice! Even nicer would have been to say that it's been formally
+proven. You were actually the first one mentioning it relies on at least two
+processes :)
+ 
+1c) 0.5pts Hmmm, really not the solution we were targeting at, but it's legit.
+:) Please still have a look at our proposal.
+ 
+1d) 0.5pts Perfect! (Even though you used the same answer twice (!), quite
+impressive work you did here :)
+ 
+ 
+2) 1pts Correct. You may could have mentioned the key part that manifests as
+shared action "c" that provides synchronization in T1 and leads to traces that
+can be found in T2.
+ 
+ 
+3) 2.5pts You could have merged state 3 with state 1 in the minimized state
+diagram, because the differentiation between "end" and "other frequency locked"
+is insignificant. The really funny thing is, though, that the minimized state
+diagrams of both your solutions are identical :D
+ 
+ 
+4) 4pts You provided a really nice solution based on error states. We like the
+solution without any error states better, but nevertheless, your solution is
+perfectly fine! Congrats on this one! :D
