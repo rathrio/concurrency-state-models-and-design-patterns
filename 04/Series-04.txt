@@ -109,3 +109,31 @@ d. Provide an action trace that does not violate the provided property.
 
 Exercise 4
 ----------
+
+You should find a file called "Ex4.java" in the archive. It provides a
+thread-safe message queue implementation that relies on balking. You'll find
+more details in the Java file.
+
+I used java version 1.8 to compile and run the program. My "java -version"
+output:
+
+    java version "1.8.0_25"
+    Java(TM) SE Runtime Environment (build 1.8.0_25-b17)
+    Java HotSpot(TM) 64-Bit Server VM (build 25.25-b02, mixed mode)
+    
+You can compile the file as usual with
+
+    javac Ex4.java
+
+To run some unit tests, execute
+
+    java Ex4 test
+
+To start a producer and a consumer thread that indefinitely spam a message
+queue of given size, execute
+
+    java Ex4 <QUEUE_SIZE>
+
+e.g.,
+
+    java Ex4 3
