@@ -46,3 +46,26 @@ f. When is it legitimate to declare only some methods as synchronized?
    critical sections, i.e., do not deal with mutable state. Even methods that
    have both critical and uncritical sections could be split up, so that only
    the critical part needs synchronization.
+
+
+Exercise 2
+----------
+
+Pot with M = 3 servings:
+
+    const M = 3
+
+    POT = POT[0],
+    POT[i:0..M] = (
+        when(i==0) fillpot -> POT[M]
+        |
+        when(i>0) getserving -> POT[i-1]
+    ).
+
+A dinner session could then be modelled with parallel composition:
+
+    ||DINING_SAVAGES = (SAVAGE || COOK || POT).
+
+
+Exercise 3
+----------
