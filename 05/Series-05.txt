@@ -6,6 +6,80 @@ Rathesan Iyadurai (10-107-688)
 Exercise 1
 ----------
 
+a. What is a guarded method and when should it be preferred over balking?
+
+   A method that allows a thread to wait for a state change by suspending it.
+   This approach is preferable anytime you can deal with waiting and have some
+   guarantee that the relevant state changes will happen. See slide 26 and 27
+   of lecture 5 for an exhaustive list.
+
+b. Why must you re-establish the class invariant before calling wait()?
+
+   wait() releases the synchronization lock, so we must treat calling it the
+   same as exiting the critical section in order to leave the object in a
+   consistent state.
+
+c. What is, in your opinion, the best strategy to deal with an
+   InterruptedException? Justify your answer!
+
+   It really depends on what kind of application you are writing, but I would
+   generally cleanup, check invariants and raise an exception if necessary.
+   This way the caller has to explicitly handle the case. This seems like the
+   safest bet, albeit annoying.
+
+d. How can you detect deadlocks? How can you avoid it?
+
+   Ways to detect it:
+
+       - Model your whole system in FSP and use the LTSA tool to find traces
+         that lead to a deadlock ;)
+       - Repeatedly check for waits-for cycles 
+
+    Avoid it by preventing waits-for cycles by having your concurrent entities
+    conform to a certain protocol. See answer to Exercise 2 for examples.
+
+    Or just write sequential programs for the rest of you life.
+
+e. Why it is generally a good idea to avoid deadlocks from the beginning
+   instead of relying on deadlock detection techniques?
+
+   Deadlock detection is not the end of the story. The often require followup
+   actions, such as rolling back changes in a database system. These measures
+   can be complex and time/memory consuming, so all the better if they can be
+   avoided.
+
+f. Why is progress a liveness rather than a safety issue?
+
+   Safety is more about nothing bad happening. From that perspective, if
+   nothing ever happens, i.e., nothing is progressing, nothing bad can ever
+   happen.
+
+   That's why we usually talk about progress (an action is eventually executed)
+   in the context of liveness, where we want something good to eventually
+   happen.
+
+g. Why should you usually prefer notifyAll() to notify()?
+
+   notify() should be used if there's some specific reason why only one of the
+   threads in the wait-set may perform the action on the state change.
+
+   However, we usually have the case that ALL waiting threads may react to the
+   state change.
+
+   I like the reasoning here (I'm mostly adding this as a later reference for
+   myself. Feel free to ignore): https://stackoverflow.com/a/3186336/1314848
+
+h. What is the difference and what are the similarities between a nested
+   monitor lockout (a.k.a. nested deadlock) and a classical deadlock?
+
+   They're similar in the way that they both occur because of some circular
+   dependency, i.e., processes wait on each other for some resource (in a
+   classical deadlock), or some signal (in nested deadlock).
+
+   So a classical deadlock occurs because shared resources are withold from one
+   another. The nested deadlock occurs because the process that can send the
+   signal cannot acquire a lock because the waiting thread is still holding it.
+
 Exercise 2
 ----------
 
