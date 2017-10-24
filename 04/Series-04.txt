@@ -137,3 +137,7 @@ queue of given size, execute
 e.g.,
 
     java Ex4 3
+
+**Update**
+
+We were allowed to use locks with conditions.

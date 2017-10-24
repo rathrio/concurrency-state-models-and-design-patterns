@@ -1,0 +1,33 @@
+Series-05
+=========
+
+Rathesan Iyadurai (10-107-688)
+
+Exercise 1
+----------
+
+Exercise 2
+----------
+
+1. One of the philosopher has to pick up the forks in reverse order. This
+   breaks the waits-for cycle. Starvation is not possible, because if one
+   philosopher wants the fork that is currently in use, he will be the next one
+   to get it.
+
+2. Introduce a "waiter" mutex that all philosophers have access to.
+   Philosophers ask the waiter for permission to pick up both forks and the waiter
+   only allows one philosopher to do so. This approach is not particularly
+   fair, since one philosopher might just never get his two forks, since his
+   neighbors are alternately acquiring the forks.
+
+3. Similar to 2, but allow only n - 1 philosophers to take a seat whereas n is
+   the number of forks. Philosophers that are not at the table wait in a FIFO
+   queue, and philosophers at the table that are done eating go wait in the
+   FIFO queue. Thus all philosophers eventually get to eat -> no one starves.
+
+4. Chandy/Misra solution: Philosophers make their forks dirty when eating.
+   Philosophers are numbered and for each neighboring pair of philosophers the one
+   with the lower number gets the fork in between first. When a philosopher wants
+   the fork, he asks his neighbor. The neighbor will keep his fork if it's clean,
+   but if it's dirty, he'll clean it and send it over. This protocol is fair,
+   since the philosophers that haven't eaten last get the forks next.
