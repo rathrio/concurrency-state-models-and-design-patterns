@@ -31,3 +31,24 @@ Exercise 2
    the fork, he asks his neighbor. The neighbor will keep his fork if it's clean,
    but if it's dirty, he'll clean it and send it over. This protocol is fair,
    since the philosophers that haven't eaten last get the forks next.
+
+
+Exercise 3
+----------
+
+Introduce a "waiter" mutex:
+
+    PHIL = (sitdown -> waiter.acquire -> right.get -> left.get -> eat -> left.put
+      -> right.put -> arise -> waiter.release -> PHIL).
+
+    FORK = (get -> put -> FORK).
+
+    LOCK = (acquire -> release -> LOCK).
+
+    ||DINERS(N=5) = forall [i:0..N-1] (
+      phil[i]:PHIL
+      ||
+      phil[j:0..N-1]::waiter:LOCK
+      ||
+      {phil[i].left,phil[((i-1)+N)%N].right}::FORK
+    ).
