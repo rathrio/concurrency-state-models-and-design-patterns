@@ -53,22 +53,53 @@ Exercise 2
 a. Why does the call Thread.currentThread().join() not make much sense in a
    thread’s concurrent run method?
 
+   Thread.currentThread() returns the currently executing thread. So calling
+   join() on the current thread in a thread's run method is basically waiting
+   on oneself, which doesn't make much sense.
+
 b. Why can you encounter an IllegalMonitorStateException when calling
    notifyAll() in a code block that is not synchronized?
+
+   To be able to call notifyAll on an object, the caller must also be the owner
+   of that object's monitor, i.e., the notifyAll call must be wrapped with a
+   synchronized block on the object, otherwise Java will throw an
+   IllegalMonitorStateException.
 
 c. What happens with the thread when the code execution gets to the end of the
    thread’s run method (suppose no loop is involved in the run method)?
 
+   It dies of natural causes, i.e., enters state TERMINATED.
+
 d. Why do some Java apps not terminate, even though the GUI has been closed and
-   custom Win- dowHandlers have been set up?
+   custom WindowHandlers have been set up?
+
+   Closing the GUI doesn't necessary terminate all threads, which results in
+   the application staying alive because of active threads. This could for
+   instance be fixed by calling System.exit(0) when the GUI is closed which
+   terminates all threads.
 
 e. Name one reason for using a while loop in a thread’s run method. Justify
    your selected reason.
+
+   You might need to perform an action multiple times until a certain condition
+   holds (or no longer holds), and you're not able to solve it with interrupts.
+
+   A good example is the snowflake thread: Re-render until some condition no
+   longer holds (it's no longer visible in the frame), and since threads die
+   automatically at the end of run() we can simply exit the loop.
+
+       public void run() {
+           while (!isOutOfView()) {
+             // re-render
+           }
+
+           // let the thread terminate
+       }
 
 
 Exercise 3
 ----------
 
-I'm using the graphics 2d instance as a monitor to trigger the snowflake
-renders per iteration and also to synchronize the draw calls to the graphics 2d
+I'm using the graphics 2d instance's monitor to trigger the snowflake renders
+per iteration and also to synchronize the draw calls to the graphics 2d
 instance itself, as suggested.
