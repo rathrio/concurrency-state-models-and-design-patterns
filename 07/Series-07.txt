@@ -64,3 +64,11 @@ d. Why do some Java apps not terminate, even though the GUI has been closed and
 
 e. Name one reason for using a while loop in a thread’s run method. Justify
    your selected reason.
+
+
+Exercise 3
+----------
+
+I'm using the graphics 2d instance as a monitor to trigger the snowflake
+renders per iteration and also to synchronize the draw calls to the graphics 2d
+instance itself, as suggested.
