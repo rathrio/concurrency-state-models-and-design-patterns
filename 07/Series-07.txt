@@ -6,3 +6,61 @@ Rathesan Iyadurai (10-107-688)
 Exercise 1
 ----------
 
+a. When should you consider using asynchronous invocations?
+
+   Basically anytime the invoker could be doing something else while waiting
+   for the result of the invocation or doesn't care about the result of the
+   invocation. See slide 4 of lecture 7.
+
+b. In what sense can a direct invocation be asynchronous?
+
+   Because of the immutable nature of the helper within a host using the direct
+   invocation pattern, there is no need for synchronization. As a consequence,
+   the host service itself could be called asynchronously.
+
+c. What is an "early reply"?
+
+   This pattern allows the host to do something after returning a result to the
+   client. This is usually used if the host needs to perform some cleanup
+   action after the result is here, but the aforementioned client doesn't care
+   about the cleanup. So there's no need to wait for the cleanup action before
+   returning the result to the client.
+
+d. What are "futures"?
+  
+   Futures allow clients to continue their work in parallel while the future
+   computes the result. It allows clients to request the result anytime. When
+   the result is there, it immediately returned, otherwise clients block on a
+   request until it's ready.
+
+e. When are futures better than early replies?
+
+   Contrary to the simple one-slot approach of early replies, a future's value
+   is not consumed, meaning that multiple clients could await the result of the
+   same future for instance.
+
+   Futures also allow clients to continue whatever work the want to do while
+   the result is being computed.
+
+   One could also argue that the concept of a future is less complex in a
+   monitor based concurrency model. (I found the java example in the lecture
+   much easier to grasp)
+
+
+Exercise 2
+----------
+
+a. Why does the call Thread.currentThread().join() not make much sense in a
+   thread’s concurrent run method?
+
+b. Why can you encounter an IllegalMonitorStateException when calling
+   notifyAll() in a code block that is not synchronized?
+
+c. What happens with the thread when the code execution gets to the end of the
+   thread’s run method (suppose no loop is involved in the run method)?
+
+d. Why do some Java apps not terminate, even though the GUI has been closed and
+   custom Win- dowHandlers have been set up?
+
+e. Name one reason for using a while loop in a thread’s run method. Justify
+   your selected reason.
