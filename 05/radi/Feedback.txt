@@ -1,0 +1,53 @@
+HUGE CONGRATS! You achieved 10/10 pts!
+ 
+1a) 0.5pts Correct. Please note that "guarded method" describes not really a
+method, but the pattern used to guard the guarded method. :)
+ 
+1b) 0.5pts Correct. Please also have a look at this other perspective: when you
+call wait() your thread blocks (loses its lock) and other threads start to
+work, potentially changing shared system states. When now the waiting thread
+gets notified, it first needs to check, if its conditions are now ok (meanwhile
+could be modified by another thread) before it should start working further.
+That's often ensured by the surrounding while (condition == true) code block.
+ 
+1c) 0.5pts Your approach sounds legit and justified. Please keep in mind that
+InterruptionExceptions are not consequently caused by other threads that
+request a thread termination. These exceptions also can be used as kind of
+"work waits for you, so please wake up and start working". It really depends on
+the conceptual design and context how to deal with these exceptions. BTW:
+Rethrowing exceptions is not one of my favorites as it increases complexity
+throughout the code with the forced exception handling. Something little to
+argue: is interruption of a thread not rather normal behavior than an
+exception?
+ 
+1d) 1pts Your LTSA tool approach is correct, albeit not very efficient. The
+same applies for sequential programs. These two solutions get you a creativity
+x2 BONUS! :)
+ 
+1e) 0.5pts PERFECT!
+ 
+1f) 0.5pts NICE!
+ 
+1g) 0.5pts PERFECT! And yes, I read your stackoverflow reference ;) quite nice
+stuff. You noticed that you can even send mails to the publisher of that
+answer? :D
+ 
+1h) 0.5pts Correct, although the keypart was that in deadlocks all threads will
+block indefinitely, but in nested monitor lockouts just one thread is
+guaranteed to block indefinitely.
+ 
+ 
+2) 1.5pts S1 starvation is possible, because it can happen that always the very
+same single philosopher starts eating (fairness is not guaranteed). This
+phenomenon is not related to the forks, but to the selection process of the
+philosophers which you didn't cover in your explanation. For your S2 again the
+waiter implementation decides about the fairness. :) Now, in your S3, we
+finally have a queue providing fairness :) Your solution is nice in general and
+because you encountered the same mistake twice I just count it as one. :D
+Please still have a look at our solution which covers a broader view on this
+topic.
+ 
+ 
+3) 2pts VERY NICE!
+ 
+4) 2pts Very nice!

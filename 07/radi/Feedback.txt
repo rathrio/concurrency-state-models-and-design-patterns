@@ -1,0 +1,56 @@
+https://media.giphy.com/media/12BsLpSspuwW1q/giphy.gif
+ 
+ 
+IMMEASURABLE HUGE CONGRATS! You achieved 10.5/10 pts!
+ 
+1a) 0.5pts Correct.
+ 
+1b) 0.5pts Correct. Just as a side note: in this context "asynchronous"
+strongly correlates with "multithreaded".
+ 
+1c) 0.5pts Nice!
+ 
+1d) 0.5pts The last sentence mixes up things, but the rest is legit. Also the
+future is not really computing a result on its own, but rather a host uses a
+future to store his results. Please consider another view: early reply returns
+a reference to the data object back to the client in which the host will put
+the result later into. The client can afterwards access the result as soon as
+the host wrote that into the object (and doesn't need to block for this).
+ 
+1e) 0.5pts Your justifications are ok. Just be careful about complexity
+statements as both approaches' complexity is hugely determined by the
+underlaying problem they tackle. FYI: They really describe two different
+concepts: Futures deliver a final result you want, whereas early replies could
+just send kind of confirmations (e.g. host confirms mail send task, but the
+mail itself will be sent after the early reply to the client). This will make
+much more sense and maybe clarifies your intention about the usage of both
+approaches.
+ 
+2a) 0.5pts Nice! FYI #2: When you call join() then an interrupt could wake up
+the thread and let him gracefully exit, because join() sets the thread into the
+wait state (as you can find at
+https://docs.oracle.com/javase/7/docs/api/java/lang/Thread.html#join(long)).
+ 
+2b) 0.5pts Yes, exactly! When you call notify you will give the monitor to the
+callee and that's why you need the monitor at first hand.
+ 
+2c) 0.5pts Short and straight. PERFECT!
+ 
+2d) 0.5pts PERFECT!
+ 
+2e) 0.5pts PERFECT! (Had to say this, because I created the loop myself :D)
+ 
+ 
+3) 5.5pts Your snowflakes are runnable threads (1pts). You also instantiated
+many of them (1pts) :). The movement is ok, but you didn't synchronize the end
+of the drawings, but just the start. That's causing slight flickering when you
+introduce much more snowflakes. Please have a look in our solutions for this
+one (2.5pts). You even used different sizes of the snowflakes (+0.5 BONUS pts
+:D) :). I have just one thing to report and that's quite an interesting one: I
+expected you to perform explicitly asynchronous draw calls in the snowflake,
+but you used synchronized drawcalls in the snowflake with a lightweight sync
+mechanism. And what a surprise, they are even better performing than in my
+solution (+0.5 pts BONUS)! :D It seems that I introduced too much thread
+management overhead, while your solution works on the snowflakes in a linear
+way. As you will see in this week's exercise the more threads are not always
+the better ;) Oh no, I just sent you a solution! Sorry for that! :D

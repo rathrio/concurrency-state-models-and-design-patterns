@@ -1,0 +1,47 @@
+CONGRATS! You achieved 9.5/10 pts!
+ 
+1a) 0.5pts Nice. However, you could have integrated the keyword "final" somehow
+into your answer ;)
+ 
+1b) 0.5pts Correct. Please provide an example next time. You can find one in
+our solutions. BTW: Shared state does not necessarily mean "guarded action".
+ 
+1c) 1pts NICE! And you know what's even nicer? Your reference to the Amdahl's
+Law! Nice thought! And what can you expect out of nice thoughts? Right, a BONUS
+x2! :D
+ 
+1d) 0.5pts Correct. We elaborated a bit more on this one, so please still go
+over our solution on this one.
+ 
+1e) 0.5pts Correct. Although we targeted more at deadlocks and nested monitor
+lockouts. So please have a look at our solution.
+ 
+1f) 0.5pts PERFECT!
+ 
+ 
+2) 2pts NICE! Please be aware that your solution still needs the additional two
+lines from the exercise sheet to work. ;)
+ 
+ 
+3a) 0.5pts That's a nasty answer, and I'm sure you are aware of it. That's the
+reason why you formulated it in a way I have to interpret your answer ;) I give
+you this one, because you were creative in rephrasing statements ;). But PLEASE
+read this: You reported i is element of range [0,9]. That is maybe correct from
+a technical standpoint, although the checks could/should be performed before
+the actual variable changes to 9 (in the state diagram representation you see
+no state holding a legit i=9 state, just the error state -> you even won't have
+any info about the variable; that's just for the creation of the graph). In
+addition, we were asking from a conceptual standpoint, and then it's quite
+clear that a safety property that limits the variable i to be within [0,8] does
+not allow the value to be 9. :)
+ 
+3b) 0.5pts Correct.  3c) 0.5pts Again: Correct.
+ 
+3d) 0.5pts And once again: Correct. :)
+ 
+ 
+4) 2pts Your solution doesn't wait during an add() / remove() as requested (but
+is using balking :). The synchronization mechanism is basic and the performance
+low, but it works. Please don't use the terms "front" / "rear" for queues, use
+"head" / "tail" instead. :) And no, you won't get a bonus for "hi there pascal"
+in your code, nice try! HAHA :D (Just googled squarepants myself.... :)
