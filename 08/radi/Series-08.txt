@@ -96,16 +96,63 @@ Exercise 4
 a) What amount of processing cores does the CPU in your notebook have and
    what’s the model / manufacturer of it?
 
+   Processor Name:	Intel Core i7 (I7-4578U)
+   Processor Speed:	3 GHz
+   Number of Processors:	1
+   Total Number of Cores:	2
+
 b) Does the implementation scale well, i.e., more concurrent threads help to
    reduce the overall calculation time? Please provide concrete runtimes you
    experienced.
 
+   I used the average of eight runs per thread for the runtime listed here.
+
+       +-----------+--------------+
+       | # Threads | Runtime (ms) |
+       +-----------+--------------+
+       |        1  |       1107.5 |
+       |        2  |        736.5 |
+       |        4  |          741 |
+       |        8  |          750 |
+       |       16  |          650 |
+       |       32  |        662.2 |
+       +-----------+--------------+
+
+   There does not seem to be a significant benefit from using more than two
+   threads.
+
 c) Depending on your results, why or why not does the solution scale well?
+
+   I believe that the synchronization overhead offsets the benefits of the
+   (arguably small) calculation inside of the calculation thread.
 
 d) How would you improve the runtime with respect to faster calculations
    (without changing the algorithm)?
 
+   Instead of spawning one thread per fraction, I'd offload a bulk of fractions
+   to a one thread, so that the synchronization overhead is actually worth it.
+   This probably requires some playing around with the "bulk size" until one
+   finds the optimal value.
+
+   I'd also use an executor with a fixed pool of threads that can be reused.
+   This should prevent spawning thousands of threads and using a semaphore to
+   limit concurrent calculations.
+
 e) Which algorithm would you recommend as drop-in replacement for the Leibniz
    formula for faster calculation?
 
+   I'm not an expert on pi approximation, so I'd probably start with one of the
+   methods described here:
+
+   https://en.wikipedia.org/wiki/Approximations_of_π#Efficient_methods
+
+   Since most of them seem to be based on a series, they could be parallelized
+   in a similar fashion.
+
 f) Why do the runtimes with identical parameters vary so much?
+
+   This really depens on the processor and how the OS does process/resource
+   management. A thread may be put to sleep at any time, because some other
+   (more importeted) processes need CPU time. I think it's very difficult to
+   comprehend why exactly it varies so much, but it all boils down to resource
+   management.
