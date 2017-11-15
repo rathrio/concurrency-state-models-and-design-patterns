@@ -1,0 +1,111 @@
+Series-08
+=========
+
+Rathesan Iyadurai (10-107-688)
+
+Exercise 1
+----------
+
+a) Why are servers (e.g. web servers) usually structured as thread-per-message
+   gateways?
+
+   Web servers usually have to deal with concurrent requests and you do not
+   want clients to wait for all of the previous client's requests to finish.
+
+   Same principle as in a grocery store basically. In a larger store, you'd
+   also employ multiple checkout lines to improve throughput.
+
+b) What are condition objects? Name at least one advantage and one disadvantage
+   of using condition objects.
+
+   Similar to monitors, condition objects allow clients to wait and get
+   notified in guarded methods.
+
+   Advantage: Allows more granular guards, i.e. different specialized
+   conditions for different scenarios. You could use this to only wake up
+   certain threads, because they're the only ones waiting for a certain
+   condition.
+
+   Disadvantage: With great flexibility comes great complexity.
+
+c) Why does the SimpleConditionObject from the lecture not need any instance
+   variables?
+
+   You could argue that it actually uses an "implicit instance variable",
+   namely the reference to "this" - the instance itself. It uses the monitor of
+   "this" for syncronization. So no other instance variables needed.
+
+d) What are “permits” and “latches”? When it is natural to use them?
+
+   Permits are useful when synchronization depends on the value of a counter,
+   e.g., we only want to allow four threads to perform some action at the same
+   time. A permit could be implemented as a condition, e.g., lecture 8 slide
+   22.
+
+   A latch acts more like a flare gun with one shot that stays in the air
+   indefinitely. You use it to send a signal once. This could for intance be
+   useful to signal that a future's value is ready.
+
+
+Exercise 2
+----------
+
+a) Which implementation would you prefer for this kind of problem? Is there any
+   considerable difference at all? Justify your answer!
+
+   I would prefer the future implementation. The early reply approach seems
+   over engineered, especially because you don't really have to clean up
+   anything. The future approach would also allow clients to do other work in
+   parallel while the wait on the future's result.
+
+b) Write a new class FutureTaskExecDemo.java that uses an executor service to
+   compute the future task and to execute the clients, instead of creating
+   explicit new threads. What is the benefit of using executors?
+
+   You don't have to manage thread creation/disposal yourself. So it's a nice
+   abstraction for the very common scenario where you have a "pool" of threads
+   available, i.e., you want to prevent that a ton of threads get spawned
+   without having to manually write guards.
+
+   It also provides some handy methods, such as shutdown() to stop taking new
+   tasks and shutdown all threads.
+
+   Note that I'm not using shutdown() here since it's just a small demo. To
+   make it work in the demo, I'd have to add some mechanism to ensure that all
+   fibonacci tasks have been submitted, and then call shutdown on the executor.
+
+c) Add a time constraint such that the client thread waits for at most a given
+   amount of time for the result.
+
+   I added a timeout to the future.get() calls. You can control it with the
+   constant TIMEOUT_SECONDS at the top of the class. I have deliberately set it
+   to 1, so that at least fibonacci(45) will timeout.
+
+
+Exercise 3
+----------
+
+We deal with a nested monitor lockout in TheNest (I see what you did there). We
+can solve this by reversing the synchronization order similar to the example
+solution in lecture 8 slide 16.
+
+
+Exercise 4
+----------
+
+a) What amount of processing cores does the CPU in your notebook have and
+   what’s the model / manufacturer of it?
+
+b) Does the implementation scale well, i.e., more concurrent threads help to
+   reduce the overall calculation time? Please provide concrete runtimes you
+   experienced.
+
+c) Depending on your results, why or why not does the solution scale well?
+
+d) How would you improve the runtime with respect to faster calculations
+   (without changing the algorithm)?
+
+e) Which algorithm would you recommend as drop-in replacement for the Leibniz
+   formula for faster calculation?
+
+f) Why do the runtimes with identical parameters vary so much?
