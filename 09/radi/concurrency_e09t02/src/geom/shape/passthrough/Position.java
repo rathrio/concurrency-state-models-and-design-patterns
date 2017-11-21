@@ -14,14 +14,14 @@ public class Position {
         private int x, y;
         
 		// TODO: Do we need synchronization for this method?
-        public void changeBoth() {
+        public synchronized void changeBoth() {
         	// TODO: Apply "Pass Through" concept here
         	this.x = (int) (this.x * 1.1);
         	this.y = (int) (this.y * 0.8);
         }
         
 		// TODO: Do we need synchronization for this method?
-        public void changeOne() {
+        public synchronized void changeOne() {
         	// TODO: Apply "Pass Through" concept here
         	this.y = (int) (this.y * 1.4);
         }
@@ -34,11 +34,12 @@ public class Position {
         	return this.y;
         }
         
-        public void x(int newValue) {
+        // Since the setters are public and also change state, they're synchronized, too.
+        public synchronized void x(int newValue) {
         	this.x = newValue;
         }
         
-        public void y(int newValue) {
+        public synchronized void y(int newValue) {
         	this.y = newValue;
         }
 }

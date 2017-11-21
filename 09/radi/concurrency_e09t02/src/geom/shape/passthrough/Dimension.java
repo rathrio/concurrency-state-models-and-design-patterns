@@ -14,14 +14,14 @@ public class Dimension {
         private int width, height;
         
 		// TODO: Do we need synchronization for this method?
-        public void changeBoth() {
+        public synchronized void changeBoth() {
     		// TODO: Apply "Pass Through" concept here
         	this.width = (int) (this.width * 1.5);
         	this.height = (int) (this.height * 0.3);
         }
         
 		// TODO: Do we need synchronization for this method?
-        public void changeOne() {
+        public synchronized void changeOne() {
     		// TODO: Apply "Pass Through" concept here
         	this.height = (int) (this.height * 0.4);
         }
@@ -34,11 +34,12 @@ public class Dimension {
         	return this.height;
         }
         
-        public void width(int newValue) {
+        // Since the setters are public and also change state, they're synchronized, too.
+        public synchronized void width(int newValue) {
         	this.width = newValue;
         }
         
-        public void height(int newValue) {
+        public synchronized void height(int newValue) {
         	this.height = newValue;
         }
 }
