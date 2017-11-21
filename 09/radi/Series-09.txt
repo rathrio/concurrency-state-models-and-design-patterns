@@ -33,6 +33,10 @@ Exercise 3
 a) How do threads waiting in a Thread.join() loop get aware of that thread’s
    termination?
 
+   They get notified via a notifyAll when the thread terminates. For details on
+   which variables the implementation loops, etc, see the Thread.join() doc:
+   https://docs.oracle.com/javase/7/docs/api/java/lang/Thread.html#join(long)
+
 b) How could you optimize the code below?
 
        Thread t = new Thread(new Runnable() {
