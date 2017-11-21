@@ -81,9 +81,15 @@ public class LockSplittingShape implements Shape {
 
 		@Override
 		public void setRectangle(int x, int y, int width, int height) {
+			// Since this is a public setter method, we'll sync here, too.
+			this.positionLock.lock();
 			this.x = x;
 			this.y = y;
+			this.positionLock.unlock();
+			
+			this.dimensionLock.lock();
 			this.width = width;
 			this.height = height;
+			this.dimensionLock.unlock();
 		}
 }

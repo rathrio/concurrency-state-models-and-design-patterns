@@ -5,3 +5,14 @@ Rathesan Iyadurai (10-107-688)
 
 Exercise 1
 ----------
+
+
+Exercise 2
+----------
+
+The Lock-Splitting approach uses two different locks for position and dimension
+changes.
+
+In the Pass-Through approach, the host object (PassThroughShape) is not
+synchronized, but the helper object (Dimension and Position) are individually
+synchronized.
