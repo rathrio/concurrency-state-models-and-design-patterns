@@ -1,0 +1,60 @@
+https://media.giphy.com/media/12BsLpSspuwW1q/giphy.gif
+ 
+ 
+IMMEASURABLE HUGE CONGRATS! You achieved 11.5/10 pts!
+ 
+1a) 1pts You provided a VERY nice analogy with the grocery store. Had to smile.
+For such things you earn, of course, a BONUS x2! :D
+ 
+1b) 0.5pts Absolutely correct. Please keep in mind that you not profoundly
+answered the "what are condition objects" part, but rather "what they provide".
+This would make a difference in a real exam. ;) So please still have a quick
+glimpse at our solution.
+ 
+1c) 1pts Exactly what I wrote back to so many students! You are the first one
+recognizing this detail! Many of them were just referring to statelessness, but
+this is just true when you look on the high-level code. Our solution leads to
+this direction, though. For this I'll give you another x2 BONUS! :D
+ 
+1d) 0.5pts Exactly! Just to provide you a comprehensive answer: the main
+difference between permits and semaphores is the naming convention of their
+methods.
+ 
+ 
+2a) 1pts Nice!
+ 
+2b) 1pts Nice! Nevertheless, I found a minor issue: you don't need the static
+keyword in your fibonacci method. In general, one could say the less static in
+the code the better the code will scale (keywords maintainability,
+concurrency). As a rule of thumb, you should avoid static whenever possible. :)
+ 
+2c) 1pts Again: Nice!
+ 
+ 
+3) 2pts Perfect! You believe that you don't need the synchronized block, but
+that's not true. You need the two blocks synchronized, because both threads can
+be in the aforementioned block at the same time, as soon as the threads have
+different runtimes and the queue has a size > 1. Just verified it for you by
+myself: B1AB2Napoleon got a yellowEgg (thread B was manipulating buf within the
+semaphores, then thread B did the same, followed by thread B finishing his buf
+modifications). You won't see much impact in the output, as the output is not
+really parsed or counted.
+ 
+ 
+4a) 0.5pts Nice! However you could have mentioned that your CPU has 4 logical
+cores :)
+ 
+4b) 1pts Nice to hear that. 48 runs, quite a number! You should receive a small
+compensation for your efforts: BONUS x2 for you! :D I'm really interested in
+your setup, as every other student got much worse results. Did you use the
+Oracle VM? Windows, Mac or Linux? x86 or x64 OS? Did you use a virtual machine?
+ 
+4c) 0.5pts Correct. It's not just the synchronization overhead, but also the
+thread maintenance overhead.
+ 
+4d) 0.5pts Nice! BTW: It's not just the synchronization overhead, but also the
+thread maintenance overhead.
+ 
+4e) 0.5pts PERFECT!
+ 
+4f) 0.5pts PERFECT!
