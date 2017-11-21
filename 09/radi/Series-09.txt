@@ -6,6 +6,15 @@ Rathesan Iyadurai (10-107-688)
 Exercise 1
 ----------
 
+a) What criteria might you use to prioritize threads (list at least 5 different
+   criteria)?
+
+b) What are different possible definitions of fairness (list at least 3
+   different definitions)? c) What are Pass-Throughs and Lock-Splitting?
+
+d) When should you consider using optimistic methods (list at least 3 different
+   enablers)?
+
 
 Exercise 2
 ----------
@@ -16,3 +25,33 @@ changes.
 In the Pass-Through approach, the host object (PassThroughShape) is not
 synchronized, but the helper object (Dimension and Position) are individually
 synchronized.
+
+
+Exercise 3
+----------
+
+a) How do threads waiting in a Thread.join() loop get aware of that thread’s
+   termination?
+
+b) How could you optimize the code below?
+
+       Thread t = new Thread(new Runnable() {
+           @Override
+           public void run() {
+               <insert your code here>
+           }
+       });
+       t.start();
+       t.join();
+
+c) Are String objects in Java mutable or immutable? Justify your answer!
+
+d) Does the FSP progress property below enforce fairness? Justify your answer!
+
+       progress HeadsOrTales = {head, tale}
+
+   No, it does not enforce fairness. It only asserts that at least one of
+   {head, tale} will be executed infinitely often. If you want fair choice,
+   you'd need a progress property for each of them.
+
+   See lecture 5 slide 8.
