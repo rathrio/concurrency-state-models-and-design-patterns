@@ -48,6 +48,12 @@ b) How could you optimize the code below?
        t.start();
        t.join();
 
+   This snippet spawns a thread and immeadiately waits for it. Hence there's no
+   benefit (even an overhead) of using a thread here. The optimized snippet
+   would look like this:
+
+       <insert your code here>
+
 c) Are String objects in Java mutable or immutable? Justify your answer!
 
    They are immutable. According to the Java specs, a "String object has a
