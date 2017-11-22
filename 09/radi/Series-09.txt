@@ -10,7 +10,9 @@ a) What criteria might you use to prioritize threads (list at least 5 different
    criteria)?
 
 b) What are different possible definitions of fairness (list at least 3
-   different definitions)? c) What are Pass-Throughs and Lock-Splitting?
+   different definitions)?
+   
+c) What are Pass-Throughs and Lock-Splitting?
 
 d) When should you consider using optimistic methods (list at least 3 different
    enablers)?
@@ -48,11 +50,24 @@ b) How could you optimize the code below?
        t.start();
        t.join();
 
-   This snippet spawns a thread and immeadiately waits for it. Hence there's no
-   benefit (even an overhead) of using a thread here. The optimized snippet
-   would look like this:
+   This snippet spawns a thread and immediately waits for it, i.e., it's a
+   sequential program. Hence, there's no benefit of using a thread here, only
+   the unnecessary overhead of thread creation, synchronization and handling of
+   InterruptedExpections (which is not depicted here). The "optimized" snippet
+   would just look like this:
 
        <insert your code here>
+
+   NB: I was wondering whether the compiler inlines the run() code if it
+   detects a start() join() invoke sequence, but apparently it does not. Here's
+   the relevant section of the bytecode (obtained with "javap"):
+   
+       11: invokespecial #5    // Method java/lang/Thread."<init>":(Ljava/lang/Runnable;)V
+       14: astore_1
+       15: aload_1
+       16: invokevirtual #6    // Method java/lang/Thread.start:()V
+       19: aload_1
+       20: invokevirtual #7    // Method java/lang/Thread.join:()V
 
 c) Are String objects in Java mutable or immutable? Justify your answer!
 
