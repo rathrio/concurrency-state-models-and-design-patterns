@@ -9,8 +9,31 @@ Exercise 1
 a) What criteria might you use to prioritize threads (list at least 5 different
    criteria)?
 
+   - The current time (e.g. earlier tasks first)
+   - The expected completion time of each task (e.g. shorter tasks first)
+   - Cost/Price/Urgency of task (e.g. expensive tasks first)
+   - Termination dependencies among tasks (e.g. tasks with fewer dependencies
+     first)
+   - The time at which each task is added to a queue
+
+   Relevant:
+   https://www.cs.uic.edu/~jbell/CourseNotes/OperatingSystems/5_CPU_Scheduling.html
+   List of scheduling algorithms that could not only be applied on OS, but also
+   application level with regard to fairness criterias listed above.
+
+   See lecture 9 slide 7 for an exhaustive list.
+
 b) What are different possible definitions of fairness (list at least 3
    different definitions)?
+
+   - Weak fairness: a process making continuous request will eventually get
+     access.
+   - Strong fairness: a process making a request infinitely often will
+     eventually get access.
+   - Linear waiting: a process making a request can at most be overtaken once
+     by other processes.
+
+   See lecture 9 slide 8 for details.
    
 c) What are Pass-Throughs and Lock-Splitting?
 
