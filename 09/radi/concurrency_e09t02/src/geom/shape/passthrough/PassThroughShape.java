@@ -13,8 +13,9 @@ import geom.shape.Shape;
  * 
  */
 public class PassThroughShape implements Shape {
-        private Position position;
-        private Dimension dimension;
+	    // Made these final since the references should be immutable.
+        private final Position position;
+        private final Dimension dimension;
         
         public PassThroughShape() {
         	this.position = new Position();

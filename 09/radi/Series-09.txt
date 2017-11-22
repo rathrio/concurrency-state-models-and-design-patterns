@@ -14,8 +14,28 @@ b) What are different possible definitions of fairness (list at least 3
    
 c) What are Pass-Throughs and Lock-Splitting?
 
+   Pass-Throughs and Lock-Splitting are concurrency control policies over
+   interception, i.e. there's a host objects that acts as a facade for
+   concurrencly available state/methods.
+
+   Pass-Throughs hosts hold immutable references to helper objects that take
+   care of synchronization, while the host itself provides unsynchronized
+   methods and simply relays them to the relevant helper. See PassThroughShape
+   in Exercise 2 for example.
+
+   Lock-Splitting hosts use different locks for subsets of the state for higher
+   concurrent access. The goto example is the hashmap that uses 16 locks for
+   each of its hash buckets, but you could also take a look at
+   LockSplittingShape in Exercise 2.
+
 d) When should you consider using optimistic methods (list at least 3 different
    enablers)?
+
+   - Clients can tolerate either failure or retries
+   - You can avoid or cope with livelock
+   - You can undo actions performed before failure checks
+
+   See lecture 9 slide 29 for details.
 
 
 Exercise 2
