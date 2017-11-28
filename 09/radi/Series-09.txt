@@ -96,7 +96,7 @@ b) How could you optimize the code below?
    This snippet spawns a thread and immediately waits for it, i.e., it's a
    sequential program. Hence, there's no benefit of using a thread here, only
    the unnecessary overhead of thread creation, synchronization and handling of
-   InterruptedExpections (which is not depicted here). The "optimized" snippet
+   InterruptedExceptions (which is not depicted here). The "optimized" snippet
    would just look like this:
 
        <insert your code here>

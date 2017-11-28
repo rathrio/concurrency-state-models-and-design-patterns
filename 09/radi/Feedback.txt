@@ -1,0 +1,39 @@
+https://media.giphy.com/media/12BsLpSspuwW1q/giphy.gif
+ 
+ 
+IMMEASURABLE HUGE CONGRATS! You achieved 11/10 pts!
+ 
+1a) 1pts Your first and last statement is very similar. Please use more
+distinct ones during an exam. :) Your provided URL is kind of random. Doesn't
+make much sense when you don't elaborate quite a bit on that. ;)
+ 
+1b) 1pts Perfect!
+ 
+1c) 1pts Nice!
+ 
+1d) 1pts One more time: Nice!
+ 
+ 
+2) 3.5pts Your calculations are correct, but I found some issues for the two
+conceptual implementations. You didn't introduce nested locks for the
+changePositionAndDimension() implementation (-0.5pts each as inconsistencies
+could potentially occur). You have (optionally) synchronized x(newValue),
+width(newValue), and so forth (+0.5pts), but you missed the synchronization on
+setRectangle(...).
+ 
+ 
+3a) 0.5pts Perfect!
+ 
+3b) 1pts Perfect! Furthermore, your decompilation of the provided code is
+really outstanding. You really should receive an x2 BONUS for your efforts! :D
+ 
+3c) 1pts Perfect, and yet again, you provided even more interesting hints,
+e.g., the reflection API for reference manipulations. That's really worth an x2
+BONUS! :D But that's just nasty as hell. Don't use that. EVER! ;) Because it's
+still quite interesting, I'll provide you a link, though:
+https://www.slideshare.net/JAXLondon2014/reflection-madness-dr-heinz-kabutz
+ 
+3d) 1pts Perfect! You also provided a solution for the fairness problem: BONUS
+x2 for you here, again! :D Please use next time absolute slide numbers (= PDF
+page number) and not the relative ones on each slides. Oscar has some confusing
+numbering schemes in his slides :)
