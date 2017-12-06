@@ -1,0 +1,87 @@
+Series-11
+=========
+
+Rathesan Iyadurai (10-107-688)
+
+Exercise 1
+----------
+
+a) List and briefly explain all the elements a petri net consists of.
+
+   A Petri net C = <P,T,I,O> consists of:
+
+   1. A finite set P of places
+      (the circles)
+   2. A finite set T of transitions
+      (the bars)
+   3. An input function I : T -> Nat^P
+      (describes incoming arcs from the circles to the bars)
+   4. An output function O
+      (describes outgoing arcs from the bars to the circles)
+
+   A marking of a Petri net is a mapping that indicates how many tokens are at
+   every given place.
+
+b) How can nets model concurrency and synchronization?
+
+   Transitions can represent concurrent processes, while markings could
+   indicate the availability of resources.
+
+   Alternatively, a process could be represented as a subnet in the Petri net,
+   where the places represent the state of a process. Tokens could then be used
+   to simulate control flow, data flow or synchronization conditions.
+
+c) What is the reachability set of a net? How can you compute this set?
+
+   The reachability set of a net is the set of all markings that can be reached
+   from an initial marking. New markings can be obtained by firing transitions.
+
+   Note the reachability set can be infinite. 
+
+d) What kinds of Petri nets can be modeled by finite state processes?
+
+   Any bounded net, i.e., a net with a finite reachability set. As described in
+   the lecture notes: "Simply introduce one state for each reachable marking
+   FSA indicating which net transitions fire between the states, and add a
+   single token for the initial marking."
+
+e) What are some simple conditions for guaranteeing that a net is bounded?
+
+   1. Places always hold at most 1 token
+   2. Places never hold more than k tokens
+   3. The total number of tokens is constant (doesn't change on transitions)
+
+f) What could you add to Petri nets to make them Turing-complete?
+
+   Petri nets cannot model priorities and "zero testing" (see lecture 12 page
+   32). So adding "zero testing" would suffice for instance.
+----------
+
+a) Petri net C = <P,T,I,O> for Figure 1:
+
+   p
+
+
+Exercise 4
+----------
+
+a) How do the classes ReentrantLock and Semaphore support fairness?
+
+   ReentrantLock's constructor accepts a fairness parameter. From the docs:
+   "The constructor for this class accepts an optional fairness parameter. When
+   set true, under contention, locks favor granting access to the
+   longest-waiting thread"
+
+   Semaphore's constructor also access a fairness parameter: "When fairness is
+   set true, the semaphore guarantees that threads invoking any of the acquire
+   methods are selected to obtain permits in the order in which their
+   invocation of those methods was processed (first-in-first-out; FIFO)"
+
+b) What are daemon threads in Java? What is their purpose? How can you create them?
+
+   A daemon thread doesn't prevent the JVM from exiting, i.e. the thread may
+   proceed running in the background while the main java process itself
+   terminates. This is useful for any kind of background activity, e.g. garbage
+   collection or even a server listening to a socket.
+
+   You can use Thread.setDaemon(true) to daemonize a Thread.
