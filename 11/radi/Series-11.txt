@@ -55,12 +55,55 @@ f) What could you add to Petri nets to make them Turing-complete?
 
    Petri nets cannot model priorities and "zero testing" (see lecture 12 page
    32). So adding "zero testing" would suffice for instance.
+
+
+Exercise 2
 ----------
 
 a) Petri net C = <P,T,I,O> for Figure 1:
 
-   p
+       P    = { x, y, z, v, w }
+       T    = { a, b, c, d }
 
+       I(a) = { v, w }
+       I(b) = { x, w }
+       I(c) = { y }
+       I(d) = { z }
+
+       O(a) = { y }
+       O(b) = { z }
+       O(c) = { v, w }
+       O(d) = { x, w }
+
+       Current marking m = { x, x, y, y, y, w }
+
+b) Petri net C = <P,T,I,O> for Figure 2:
+
+       P    = { a, b, c, d }
+       T    = { x, y }
+
+       I(x) = { a, b }
+       I(y) = { c, d }
+
+       O(x) = { c, d }
+       O(y) = { b }
+
+       Current marking m = { a, a, b }
+
+c) Is the Petri net in Figure 2 bounded? Safe? Conservative? Are all the
+   transitions live?
+
+   - It is 2-bounded.
+   - It is not safe, because place "a" holds 2 tokens.
+   - It is not conservative (changes from 3 to 2 tokens as soon as you can fire
+     the bottom transition)
+   - The top transition can deadlock if "a" reaches 0 tokens.
+
+
+Exercise 3
+----------
+
+See exercise3.jpg.
 
 Exercise 4
 ----------
