@@ -14,21 +14,34 @@ a) What is a Software Architecture? What is its benefit?
    and how they interact.
 
    It helps developers reason about the software system. It often introduces
-   common vocabulary, such as "models" and "controllers", to easy communication
-   and configuration rules and conventions to easy design decisions and reduce
+   common vocabulary, such as "models" and "controllers", to ease communication
+   and configuration rules and conventions to ease design decisions and reduce
    cowboy coding chaos.
 
 b) What are the potential disadvantages when using layered architectures?
 
    - Performance could suffer because of passing through layers
    - Complexity and indirection when reading code
-   - Low-layer changes could trickle through to the highest layer and could
+   - Low-layer changes could trickle through to the highest layer and
      affect multiple teams responsible for different layers (a little
      far-fetched, I know...this problem probably exists in every kind of
      architecture)
 
 c) Provide an example in which the pattern Specialist Parallelism could be a
    legitimate architectural choice. Justify your answer!
+
+   The Specialist Parallelism Architecture can be applied to any kind of
+   pipeline where you have specialized workers in specific stages.
+
+   Real-life example from the company I work at: We elicit a lot of patient
+   data from all kinds of health institutions (e.g. hospitals) in Switzerland.
+   This patient data needs to be validated, imported into our database,
+   pre-processed and classified, i.e., run through a pipeline.
+
+   We have modelled this by letting the data flow through a pipeline of
+   specialized background workers.
+
+     ... -> Validation worker -> Import worker -> Classifier worker -> ...
 
 d) The concepts Result Parallelism, Specialist Parallelism and Agenda
    Parallelism represent three ways of thinking about the problem. Can you tell on
@@ -43,7 +56,8 @@ g) What are Unix pipes and how do you use them?
 
    Unix pipes allow you to create a pipeline of processes. A pipeline is simply
    a chain of processes where the standard output of a process feeds into the
-   standard input of the next one. Example:
+   standard input of the next one. For printing line numbers of all C files in
+   the current directory in descending order you could run:
 
        ls | grep \.c$ | xargs -P 4 wc -l | sort -r
 
