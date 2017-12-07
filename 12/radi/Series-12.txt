@@ -47,10 +47,26 @@ d) The concepts Result Parallelism, Specialist Parallelism and Agenda
    Parallelism represent three ways of thinking about the problem. Can you tell on
    what they focus? Provide one sentence for each one of them.
 
+   [TODO]
+
 e) What is a Flow Architecture? What are Blackboard Architectures?
+
+   A Flow Architectures describes a system where components pass data to each
+   other in one direction only. This can help avoid many synchronization
+   problems and also drastically simplify reasoning about data flow.
+   
+   This architecture can be found in unix "pipes and filters" or modern
+   frontend application architectures, such as Facebook's Flux
+   (https://facebook.github.io/flux/).
+
+   In a Blackboard Architecture, the components do not directly communicate,
+   but post messages to a blackboard and reading messages from a shared
+   location (a channel, message queue).
 
 f) Which blackboard style should be preferred when we have multiple processors?
    Why?
+
+   [TODO]
 
 g) What are Unix pipes and how do you use them?
 
@@ -66,3 +82,17 @@ g) What are Unix pipes and how do you use them?
 
 Exercise 2
 ----------
+
+- To what extend are we expected to write down FSPs in the exam? Can you
+  provide some more sample questions to practice on? Does the syntax have to be
+  100% correct in the exam?
+
+- Could you again explain "implement the monitor using semaphore" and
+  vice-versa example? I think a lot of students (me included) had some
+  difficulties when we discussed the solution in the first exercise and I'm
+  still not 100% sure if I'd do it correctly.
+
+- In the exercises we were expected to answer some Java specific questions. I
+  had to google most of the stuff since I don't have much experience in
+  concurrent Java programming. To what extend should we prepare Java
+  concurrency nitty-gritties for the exam?
