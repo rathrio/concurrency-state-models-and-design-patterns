@@ -1,0 +1,54 @@
+Series-12
+=========
+
+Rathesan Iyadurai (10-107-688)
+
+
+Exercise 1
+----------
+
+a) What is a Software Architecture? What is its benefit?
+
+   Software Architecture defines the design of a software system on a high
+   level in terms of large-scale components, e.g., model, view, controller,
+   and how they interact.
+
+   It helps developers reason about the software system. It often introduces
+   common vocabulary, such as "models" and "controllers", to easy communication
+   and configuration rules and conventions to easy design decisions and reduce
+   cowboy coding chaos.
+
+b) What are the potential disadvantages when using layered architectures?
+
+   - Performance could suffer because of passing through layers
+   - Complexity and indirection when reading code
+   - Low-layer changes could trickle through to the highest layer and could
+     affect multiple teams responsible for different layers (a little
+     far-fetched, I know...this problem probably exists in every kind of
+     architecture)
+
+c) Provide an example in which the pattern Specialist Parallelism could be a
+   legitimate architectural choice. Justify your answer!
+
+d) The concepts Result Parallelism, Specialist Parallelism and Agenda
+   Parallelism represent three ways of thinking about the problem. Can you tell on
+   what they focus? Provide one sentence for each one of them.
+
+e) What is a Flow Architecture? What are Blackboard Architectures?
+
+f) Which blackboard style should be preferred when we have multiple processors?
+   Why?
+
+g) What are Unix pipes and how do you use them?
+
+   Unix pipes allow you to create a pipeline of processes. A pipeline is simply
+   a chain of processes where the standard output of a process feeds into the
+   standard input of the next one. Example:
+
+       ls | grep \.c$ | xargs -P 4 wc -l | sort -r
+
+   https://explainshell.com/explain?cmd=ls%20%7C%20grep%20%5C.c$%20%7C%20xargs%20-P%204%20wc%20-l%20%7C%20sort%20-r
+
+
+Exercise 2
+----------
