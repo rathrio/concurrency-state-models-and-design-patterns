@@ -47,7 +47,16 @@ d) The concepts Result Parallelism, Specialist Parallelism and Agenda
    Parallelism represent three ways of thinking about the problem. Can you tell on
    what they focus? Provide one sentence for each one of them.
 
-   [TODO]
+   In Result Parallelism, multiple workers produce the parts (results) of a
+   more complex whole (result).
+
+   In Specialist Parallelism, each worker is specialized to perform a
+   particular task. See 1d) for an example.
+
+   In Agenda Parallelism, workers perform tasks from a blackboard (while
+   spawning new ones if necessary) until everything is done. Contrary to the
+   workers in Specialist Parallelism, a worker should be able to perform any
+   task on the blackboard.
 
 e) What is a Flow Architecture? What are Blackboard Architectures?
 
@@ -66,7 +75,12 @@ e) What is a Flow Architecture? What are Blackboard Architectures?
 f) Which blackboard style should be preferred when we have multiple processors?
    Why?
 
-   [TODO]
+   I'd argue that the Agenda Parallelism suits best, since we're dealing with
+   arbitrary tasks that do not necessary have to depend on each other as often
+   as in the Specialist or Result Parallelism Style.
+
+   More independent tasks means less synchronization overhead and more benefit
+   from multiple processors.
 
 g) What are Unix pipes and how do you use them?
 
@@ -89,8 +103,9 @@ Exercise 2
 
 - Could you again explain "implement the monitor using semaphore" and
   vice-versa example? I think a lot of students (me included) had some
-  difficulties when we discussed the solution in the first exercise and I'm
-  still not 100% sure if I'd do it correctly.
+  difficulties when we first discussed the solution and I'm still not 100% sure
+  if I'd do it correctly. I'd be nice to look back at it now that we have some
+  more skills :)
 
 - In the exercises we were expected to answer some Java specific questions. I
   had to google most of the stuff since I don't have much experience in
