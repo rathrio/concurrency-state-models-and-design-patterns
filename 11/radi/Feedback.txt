@@ -1,0 +1,30 @@
+You achieved 6.5/10 pts!
+ 
+1a) 0.5pts Correct, short and straight. :)
+ 
+1b) 0.5pts Correct.
+ 
+1c) 0pts You did not really explain how you would compute the set. "Firing transitions" is a trial-and-error approach and not really computed in any way. We expected to hear something about trees or other structures that you can link to this problem. Please have a quick look at our solution. :)
+ 
+1d) 0.5pts Great!
+ 
+1e) 0.5pts Your first and second statement doesn't really count. You basically say "a Petri net is bounded when it is bounded". However, your third statement brings it to the point: it is bounded when transitions don't modify the overall token count. That's one out of many valid possible conditions. Please have a look at our solutions for more inspirations. :)
+ 
+1f) 0.5pts Correct.
+ 
+ 
+2a) 1pts
+ 
+2b) 0.5pts O(x) is {b, c, d} and not just {c, d}
+ 
+2c) 0.5pts It is 3-bounded (you may missed the bidirectional arrow) (-0.5pts). Additionally, you were asked about the liveness of all transitions, but you replied just with "deadlock can happen". You really should have mentioned that not all transitions of the Petri net are live instead. During an exam this answer would not have been accepted. ;)
+ 
+ 
+3) 1.5pts You used two identical representations for the two machines. They even are able to retrieve the lock and perform reads (1.5pts). However, they release of the write does not work (you do have no output function to the upper left / right places, screenshot attached) (-0.5pts), and you can encounter deadlocks (screenshot attached) (-1pts). Remember the mutex implementation was the starting point. 😊
+ 
+ 
+4a) 0.5pts Please keep in mind that fairness is disabled by default in Oracles' Java implementation.
+ 
+4b) 0pts You didn't explain what daemon threads are, but what they do. Subsequently, you introduced a contradiction: "A daemon thread doesn't prevent the JVM from exiting" contradicts "the thread may
+   proceed running in the background while the main java process itself
+terminates". The important part here was that daemon threads will terminate as soon as all user-threads terminate. In other words, a running thread in the background while no GUI element allows any interaction is not possible with this kind of threads.

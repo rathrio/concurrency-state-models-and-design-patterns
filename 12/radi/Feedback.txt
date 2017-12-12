@@ -1,0 +1,18 @@
+HUGE CONGRATS! You achieved 10/10 pts!
+ 
+1a) 1pts PERFECT! ("cowboy coding chaos", nice one! :D)
+ 
+1b) 1pts PERFECT!
+ 
+1c) 1pts NICE!
+ 
+1d) 1pts Well done!
+ 
+1e) 1pts You implicitly supposed it: the blackboard is the synchronized communication medium.
+ 
+1f) 1pts PERFECT! You are one of the few that got that completely! FYI: In agenda parallelism workers are typically able to perform arbitrary tasks. This arbitrariness requires that every worker has to do the same job, which in turn supports scaling, as you just can instantiate as many workers as you'd like to perform a given task. So this pattern should outperform the others by far in terms of scalability and maintainability.
+ 
+1g) 1pts Correct. You could have mentioned that pipes are bounded buffers, though. :)
+ 
+ 
+2) 3pts Your questions will be responded in a follow-up mail. Thank you for your understanding.
